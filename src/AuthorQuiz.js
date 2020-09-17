@@ -1,5 +1,5 @@
 import React from 'react';
-// import TestExample from './examples';
+import TestExample from './examples';
 
 import './bootstrap.min.css';
 import './AuthorQuiz.css';
@@ -49,13 +49,11 @@ const Continue = () => (
 function AuthorQuiz({turnData}) {
     return (
         <div className="container-fluid">
+            <TestExample />   
             <Hero />
             <Turn {...turnData} />
             <Continue />
-            <Footer />
-
-
-            {/* <TestExample />           */}
+            <Footer />       
         </div>
     );
 }
