@@ -1,5 +1,5 @@
 import React from 'react';
-import Test from './Reloader';
+import Test from './EvenCounter';
 
 const TestExample = () => {
     return (
