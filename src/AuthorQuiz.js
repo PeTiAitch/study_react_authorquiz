@@ -74,7 +74,7 @@ const Continue = () => (
 function AuthorQuiz({ turnData, highlight, onAnswerSelected }) {
     return (
         <div className="container-fluid">
-            {/* <TestExample />    */}
+            <TestExample />   
             <Hero />
             <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
             <Continue />

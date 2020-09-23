@@ -1,5 +1,5 @@
 import React from 'react';
-import Test from './EvenCounter';
+import {Test} from './JsonSchemaForm';
 
 const TestExample = () => {
     return (
