@@ -4,6 +4,7 @@ import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'lodash';
+import {renderExample } from './examples/react_router'
 
 const authors = [
     {
@@ -75,7 +76,8 @@ function onAnswerSelected(answer) {
 function render() {
     ReactDOM.render(<AuthorQuiz {...state} onAnswerSelected={onAnswerSelected} />, document.getElementById('root'));
 }
-render();
+// render();
+renderExample();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
