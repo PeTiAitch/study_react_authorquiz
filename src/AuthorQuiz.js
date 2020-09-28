@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import TestExample from './examples';
-import RefExample from './examples/RefExample';
 
 import './bootstrap.min.css';
 import './AuthorQuiz.css';
@@ -69,18 +68,28 @@ const Book = ({ title = '', onClick = v => v }) => (
     </div>
 );
 
-const Continue = () => (
-    null
-);
+const Continue = ({ show, onContinue }) => {
+    return (
+        <div className="row continue">
+            { show
+                ? <div className="col-11">
+                    <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue</button>
+                </div>
+                : null}
+        </div>
+    );
+}
 
-function AuthorQuiz({ turnData, highlight, onAnswerSelected }) {
+function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
     return (
         <div className="container-fluid">
-            <RefExample />
             {/* <TestExample />    */}
             <Hero />
             <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-            <Continue />
+            <Continue 
+                show={highlight === 'correct'}
+                onContinue={onContinue}
+            />
             <p><Link to="/add">Add an author</Link></p>
             <Footer />
         </div>
