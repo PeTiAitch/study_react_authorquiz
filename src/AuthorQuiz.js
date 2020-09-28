@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TestExample from './examples';
+import { Link } from 'react-router-dom';
+// import TestExample from './examples';
+import RefExample from './examples/RefExample';
 
 import './bootstrap.min.css';
 import './AuthorQuiz.css';
@@ -74,10 +76,12 @@ const Continue = () => (
 function AuthorQuiz({ turnData, highlight, onAnswerSelected }) {
     return (
         <div className="container-fluid">
-            <TestExample />   
+            <RefExample />
+            {/* <TestExample />    */}
             <Hero />
             <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
             <Continue />
+            <p><Link to="/add">Add an author</Link></p>
             <Footer />
         </div>
     );
