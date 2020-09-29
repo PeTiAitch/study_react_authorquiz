@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import TestExample from './examples';
+// import Stopwatch from './examples/StopwatchMVI';
 
 import './bootstrap.min.css';
 import './AuthorQuiz.css';
@@ -83,7 +83,7 @@ const Continue = ({ show, onContinue }) => {
 function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
     return (
         <div className="container-fluid">
-            {/* <TestExample />    */}
+            {/* <Stopwatch />    */}
             <Hero />
             <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
             <Continue 

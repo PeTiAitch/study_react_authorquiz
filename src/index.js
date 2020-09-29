@@ -11,7 +11,7 @@ import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'lodash';
 import AddAuthorForm from './AddAuthorForm';
-// import {renderExample } from './examples/react_router'
+import {renderExample } from './examples/StopwatchMVI'
 
 
 const authors = [
@@ -115,8 +115,8 @@ function render() {
         document.getElementById('root')
     );
 }
-render();
-//renderExample();
+// render();
+renderExample();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
