@@ -82,7 +82,6 @@ const Continue = ({ show, onContinue }) => {
 }
 
 function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
-    console.log(highlight)
     return (
         <div className="container-fluid">
             {/* <Stopwatch />    */}
