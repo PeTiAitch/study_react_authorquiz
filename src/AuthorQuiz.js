@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import Stopwatch from './examples/StopwatchMVI';
@@ -81,12 +82,13 @@ const Continue = ({ show, onContinue }) => {
 }
 
 function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
+    console.log(highlight)
     return (
         <div className="container-fluid">
             {/* <Stopwatch />    */}
             <Hero />
             <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-            <Continue 
+            <Continue
                 show={highlight === 'correct'}
                 onContinue={onContinue}
             />
@@ -96,4 +98,18 @@ function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
     );
 }
 
-export default AuthorQuiz;
+const mapStateToProps = (state) => ({
+    turnData: state.turnData,
+    highlight: state.highlight
+});
+
+const mapDispatchToProps = dispatch => ({
+    onAnswerSelected: answer => {
+        dispatch({type: 'ANSWER_SELECTED', answer})
+    },
+    onContinue: () => {
+        dispatch({ type: 'CONTINUE' });
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);

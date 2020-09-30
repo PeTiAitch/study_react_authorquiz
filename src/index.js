@@ -5,13 +5,15 @@ import {
     Route,
     withRouter
 } from 'react-router-dom';
+import * as Redux from 'redux';
+import * as ReactRedux from 'react-redux';
 
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'lodash';
 import AddAuthorForm from './AddAuthorForm';
-import {renderExample } from './examples/stopwatch_react_redux'
+// import {renderExample } from './examples/stopwatch_react_redux'
 
 
 const authors = [
@@ -70,53 +72,50 @@ function getTurnData(authors) {
     }
 }
 
-function resetState() {
-    return {
-        turnData: getTurnData(authors),
-        highlight: ''
-    };
+const reducer = (
+    state = { authors, turnData: getTurnData(authors), highlight: '' },
+    action) => {
+    switch (action.type) {
+        case 'ANSWER_SELECTED':
+            const isCorrect = state.turnData.author.books.some((book) => book === action.answer);
+            return Object.assign(
+                {},
+                state, {
+                highlight: isCorrect ? 'correct' : 'wrong'
+            });
+
+        case 'CONTINUE':
+            return Object.assign({}, state, {
+                highlight: '',
+                turnData: getTurnData(state.authors)
+            });
+
+        case 'ADD_AUTHOR':
+            return Object.assign({}, state, {
+                authors: state.authors.concat([action.author])
+            });
+        default:
+            return state;
+    }
 }
-
-let state = resetState();
-
-function onAnswerSelected(answer) {
-    const isCorrect = state.turnData.author.books.some((book) => book === answer);
-    state.highlight = isCorrect ? 'correct' : 'wrong';
-    render();
-}
-
-function App() {
-    return <AuthorQuiz {...state}
-        onAnswerSelected={onAnswerSelected}
-        onContinue={() => {
-            state = resetState();
-            render();
-        }} />;
-}
-
-const AuthorWrapper = withRouter(({ history }) =>
-    <AddAuthorForm onAddAuthor={(author) => {
-        authors.push(author);
-        history.push('/');
-    }} />
+let store = Redux.createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-// function AuthorWrapper() {
-//     return <AddAuthorForm onAddAuthor={console.log} />
+console.log(store.getState())
+ReactDOM.render(
+    <BrowserRouter>
+        <ReactRedux.Provider store={store}>
+            <Route path="/" exact component={AuthorQuiz} />
+            <Route path="/add" component={AddAuthorForm} />
+        </ReactRedux.Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+);
 
-// }
 
-function render() {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Route path="/" exact component={App} />
-            <Route path="/add" component={AuthorWrapper} />
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
-// render();
-renderExample();
+// renderExample();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
