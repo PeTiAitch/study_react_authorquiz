@@ -11,7 +11,7 @@ import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'lodash';
 import AddAuthorForm from './AddAuthorForm';
-import {renderExample } from './examples/stopwatch_redux'
+import {renderExample } from './examples/stopwatch_react_redux'
 
 
 const authors = [
